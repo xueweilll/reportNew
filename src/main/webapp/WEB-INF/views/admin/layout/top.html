@@ -1,0 +1,61 @@
+ <div class="navbar-header">
+      <a class="navbar-brand" href="${req.contextPath}/">
+	    <img src="${req.contextPath}/styles/admin/log1.png" class="img-responsive pull-left" style="margin-top:-5px;margin-right:5px;width:40px;">
+	    Lemon <sub><small>1.7.0</small></sub>
+      </a>
+    </div>
+
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+	    <li>
+          <form class="navbar-form navbar-search" action="/lemon/pim/address-list-list.do" role="search">
+            <div class="form-group">
+              <input class="form-control search-query" placeholder="搜索" name="username" type="text">
+            </div>
+          </form>
+	    </li>
+	  
+		
+
+              <li class="dropdown ">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+		  <i class="glyphicon glyphicon-list"></i>
+		  系统配置 <b class="caret"></b>
+		</a>
+                <ul class="dropdown-menu">
+    
+      <li><a href="/lemon/user/account-info-list.do"><i class="glyphicon glyphicon-list"></i> XXXXXX</a></li>
+      <li class="divider"></li>
+    
+      <li><a href="/lemon/bpm/bpm-process-list.do"><i class="glyphicon glyphicon-list"></i> XXXXX</a></li>
+      <li class="divider"></li>
+    
+ 
+    
+                </ul>
+              </li>
+
+
+        <li class="dropdown">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+			<@shiro.principal/>
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+		    <li class="text-center">&nbsp;</li>
+            <li  id="pinfo_p"><a href="javascript:;"><i class="glyphicon glyphicon-list"></i> 个人信息</a></li>
+            <li class="divider"></li>
+			<li><a href="${req.contextPath}/user/logout"><i class="glyphicon glyphicon-list"></i> 退出</a></li>
+          </ul>
+        </li>
+
+        <script type="text/javascript">
+		$(function(){
+			var $userinfo = $('#uinfo_modal').modal({show: false});
+			$("#pinfo_p").click(function(){
+				$userinfo.modal('show');
+			});
+		});
+		</script>
+      </ul>
+    </div>

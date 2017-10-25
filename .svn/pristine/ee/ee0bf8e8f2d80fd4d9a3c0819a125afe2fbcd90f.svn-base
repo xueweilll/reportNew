@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mj.report.dao.MenuDao" >
+  <resultMap id="BaseResultMap" type="com.mj.report.model.Menu" >
+    <id column="menu_id" property="menuId" jdbcType="INTEGER" />
+    <result column="Is_leaf" property="isLeaf" jdbcType="INTEGER" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="menu_url" property="menuUrl" jdbcType="VARCHAR" />
+    <result column="icon_url" property="iconUrl" jdbcType="VARCHAR" />
+    <result column="parent_menu_id" property="parentMenuId" jdbcType="INTEGER" />
+    <result column="parent_menu_ids" property="parentMenuIds" jdbcType="VARCHAR" />
+    <result column="available" property="available" jdbcType="INTEGER" />
+     <result column="is_default" property="isDefault" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    menu_id, Is_leaf, menu_name, menu_url, icon_url, parent_menu_id, parent_menu_ids,is_default,available
+  </sql>
+  
+  <!-- 查询栏目（可选条件查询） -->
+  <select id="getAllMenuByPId" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from menu where available = 0 and parent_menu_id = #{pid,jdbcType=INTEGER}
+  </select>
+  
+  
+  <!-- 查询栏目 -->
+  <select id="findAllMenu" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from menu where available = 0
+  </select>
+  
+  <!-- 查询栏目根据主键id -->
+  <select id="getAllMenuById" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from menu where menu_id in 
+    
+    <foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+ 	 #{item}   
+	</foreach>  
+  </select>
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from menu
+    where  available = 0 and  menu_id = #{menuId,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 删除 -->
+  <delete id="deleteByMenuId" parameterType="java.lang.Integer" >
+    delete from menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mj.report.model.Menu" >
+    insert into menu (menu_id, Is_leaf, menu_name, 
+      menu_url, icon_url, parent_menu_id, parent_menu_ids
+      )
+    values (#{menuId,jdbcType=INTEGER}, #{isLeaf,jdbcType=INTEGER}, #{menuName,jdbcType=VARCHAR}, 
+      #{menuUrl,jdbcType=VARCHAR}, #{iconUrl,jdbcType=VARCHAR}, #{parentMenuId,jdbcType=INTEGER}, #{parentMenuIds,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <!-- 插入 -->
+  <insert id="insertMenu" useGeneratedKeys="true" keyProperty="menuId" parameterType="com.mj.report.model.Menu" >
+    insert into menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="isLeaf != null" >
+        Is_leaf,
+      </if>
+      <if test="menuName != null" >
+        menu_name,
+      </if>
+      <if test="menuUrl != null" >
+        menu_url,
+      </if>
+      <if test="iconUrl != null" >
+        icon_url,
+      </if>
+      <if test="parentMenuId != null" >
+        parent_menu_id,
+      </if>
+      <if test="parentMenuIds != null" >
+        parent_menu_ids,
+      </if>
+      <if test="available != null" >
+        available,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="isLeaf != null" >
+        #{isLeaf,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="iconUrl != null" >
+        #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="parentMenuId != null" >
+        #{parentMenuId,jdbcType=INTEGER},
+      </if>
+      <if test="parentMenuIds != null" >
+        #{parentMenuIds,jdbcType=VARCHAR},
+      </if>
+      <if test="available != null" >
+        #{available,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <!-- 修改 -->
+  <update id="updateMenu" parameterType="com.mj.report.model.Menu" >
+    update menu
+    <set >
+      <if test="isLeaf != null" >
+        Is_leaf = #{isLeaf,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null" >
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        menu_url = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="iconUrl != null" >
+        icon_url = #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="parentMenuId != null" >
+        parent_menu_id = #{parentMenuId,jdbcType=INTEGER},
+      </if>
+      <if test="parentMenuId != null" >
+        parent_menu_ids = #{parentMenuIds,jdbcType=VARCHAR},
+      </if>
+      <if test="available != null" >
+        available = #{available,jdbcType=INTEGER},
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mj.report.model.Menu" >
+    update menu
+    set Is_leaf = #{isLeaf,jdbcType=INTEGER},
+      menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_url = #{menuUrl,jdbcType=VARCHAR},
+      icon_url = #{iconUrl,jdbcType=VARCHAR},
+      parent_menu_id = #{parentMenuId,jdbcType=INTEGER},
+      parent_menu_ids = #{parentMenuIds,jdbcType=VARCHAR}
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+</mapper>

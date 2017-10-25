@@ -1,0 +1,112 @@
+<script type="text/javascript" src="${req.contextPath}/styles/admin/js/user.js"></script>
+<script>
+	$(function(){
+		//数据表格初始化
+		$('#userGrid').bootstrapTable({
+			url: '${req.contextPath}/user/userlist',
+			queryParams:paginationParam,
+			striped: false, 
+			pageList: [10, 20, 50, 100],
+			pageSize: 10,  
+			pageNumber: 1,  
+			sidePagination: "server",//表格分页的位置
+			queryParamsType: "limit", //参数格式,发送标准的RESTFul类型的参数请求
+			pagination:true,
+			clickToSelect: true,//点击行即可选中单选/复选框  
+			singleSelect:true,
+			formatLoadingMessage: function () {  
+			    return "请稍等，正在加载中...";  
+			  },  
+			formatNoMatches: function () {  //没有匹配的结果  
+			    return '无符合条件的记录';  
+			},  
+		    columns: [
+              	{
+                 field: 'state',
+                 checkbox: true,
+                 rowspan: 2,
+                 align: 'center',
+                 valign: 'middle'
+            }
+		       ,{
+		        field: 'userId',
+		        title: 'ID'
+		    }, {
+		        field: 'username',
+		        title: '用户名'
+		    }, {
+		        field: 'latestLoginTime',
+		        title: '最后登陆时间',
+		        formatter:date_fr
+		    }, {
+		        field: 'mobileNumber',
+		        title: '手机号'
+		    }, {
+		        field: 'roleName',
+		        title: '角色类型'
+		    }, {
+		        field: 'registerTime',
+		        title: '注册日期',
+		        formatter:date_fr
+		    }, {
+		        field: 'status',
+		        title: '状态',
+		        formatter:status_fr
+		    }, {
+		        field: 'action',
+		        title: '操作',
+		        formatter:actionFormatter,
+		        events:actionEvents
+		    }
+		    ]
+		});
+		
+	});
+	
+</script>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		查询
+		<div class="pull-right ctrl">
+			<a class="btn btn-default btn-xs"><i id="pimRemindSearchIcon"
+				class="glyphicon glyphicon-chevron-up"></i></a>
+		</div>
+	</div>
+	<div class="panel-body form-inline" style="display: block;">
+			<label for="pimRemind_description">用户名:</label> 
+			<input id="userName"  class="form-control" type="text">
+			
+			<label for="pimRemind_description">手机号:</label> 
+			<input id="mobileNum"  class="form-control" type="text">
+			
+			<label for="pimRemind_description">最后登录:</label> 
+			<input id="startDate"  class="form-control  date-picker" data-date-format="yyyy-mm-dd" type="text"> -
+			<input id="endDate"  class="form-control  date-picker" data-date-format="yyyy-mm-dd" type="text">
+			
+			<button class="btn btn-default a-search" id="searche_user">查询</button>
+			&nbsp;
+	</div>
+</div>
+
+<div style="margin-bottom: 20px;">
+	<div class="pull-left btn-group" role="group">
+		<button class="btn btn-default a-insert" id="re_send_add">新建</button>
+		<button class="btn btn-default a-remove" disabled id="re_send_del">删除</button>
+		<button class="btn btn-default a-import" id="tabs_mode">多标签</button>
+		<button class="btn btn-default a-export" id="re_send_export">导出</button>
+	</div>
+	<div class="clearfix"></div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">列表</div>
+
+	<table id="userGrid" class="table table-hover">
+
+	</table>
+</div>
+<!-- 修改、新增页面 -->
+<#include "/admin/user/editAdd.html"/>
+<!-- 多标签页面 -->
+<#include "/admin/user/tabs.html"/>
+

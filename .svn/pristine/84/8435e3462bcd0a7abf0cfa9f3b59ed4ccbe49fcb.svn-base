@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<script>var path = "${req.contextPath}";</script>
+		<!-- 如果当前浏览器版本是<=IE8的，使用chrome，如果不是，则使用IE。-->
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=IE8">
+		<meta charset="utf-8" />
+		<title>报表系统</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="${req.contextPath}/styles/favicon.ico" mce_href="${req.contextPath}/styles/favicon.ico" type="image/x-icon" />
+		<!-- 公用js部分 -->
+<!-- 		<script src="${req.contextPath}/styles/admin/js/common.js"></script> -->
+		  <!-- html5 -->
+    <!--[if lt IE 9]>
+	<script src="${req.contextPath}/styles/admin/respond/1.4.2/respond.min.js"></script>
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/html5/html5shiv.js"></script>
+    <![endif]-->
+	<link rel='stylesheet' href='${req.contextPath}/styles/admin/bootstrap/3.3.6/css/bootstrap.min.css' type='text/css' media='screen' />
+    <!-- jquery -->
+    <script type='text/javascript' src="${req.contextPath}/styles/admin/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/jquery/jquery-migrate-1.2.1.min.js"></script>
+	<!-- bootstrap -->
+    <script type='text/javascript' src="${req.contextPath}/styles/admin/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- message -->
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/jquery-sliding-message/jquery.slidingmessage.min.js"></script>
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/mossle/js/table.js"></script>
+
+    <!-- table and pager -->
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/pagination/pagination.js"></script>
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/table/table.js"></script>
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/table/messages_zh_CN.js"></script>
+
+    <!-- validater -->
+   	<link rel="stylesheet" href="${req.contextPath}/styles/admin/bootstrapValidator/css/bootstrapValidator.css">
+    <script src="${req.contextPath}/styles/admin/bootstrapValidator/js/bootstrapValidator.js"></script>
+
+    <!-- datepicker -->
+    <link type="text/css" rel="stylesheet" href="${req.contextPath}/styles/admin/bootstrap-datepicker/datepicker.css">
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/bootstrap-datepicker/locales/bootstrap-datepicker.zh_CN.js"></script>
+    <link href="${req.contextPath}/styles/admin/bootstrap-datetimepicker/css/datetimepicker.css" rel="stylesheet">
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh_CN.js"></script>
+
+	<!-- tree -->
+    <link rel="stylesheet" href="${req.contextPath}/styles/admin/ztree/zTreeStyle/zTreeStyle.css" type="text/css" />
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/ztree/jquery.ztree.all-3.5.min.js"></script>
+
+    <!-- ckeditor -->
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/ckfinder/ckfinder.js"></script>
+
+	<!-- tablednd -->
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/jquery-tablednd/jquery.tablednd.min.js"></script>
+    
+	<!-- bootstrap table数据表格 -->
+	<link rel="stylesheet" href="${req.contextPath}/styles/admin/bootstrap-table/bootstrap-table.min.css">
+	<script type="text/javascript" src="${req.contextPath}/styles/admin/bootstrap-table/bootstrap-table.js"></script>
+	<script src="${req.contextPath}/styles/admin/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+     <!-- 可关闭tab，两种方式，一种是div加载，一种是iframe加载，此处用的是第一种 -->
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/bootstrap-tab/closable-tab-div.js"></script>
+    <!-- 公共部分js -->
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/js/common.js"></script>
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/layer/layer.js"></script>
+    
+    <script src='${req.contextPath}/styles/admin/portal/dashboard.js' type='text/javascript'></script>
+    <link rel='stylesheet' href='${req.contextPath}/styles/admin/portal/dashboard.css' type='text/css' media='screen' />
+    <script type="text/javascript" src="${req.contextPath}/styles/admin/portal/portal.js"></script>
+    <!-- jquery.fileupload -->
+   	<link rel="stylesheet" href="${req.contextPath}/styles/admin/jquery-file-upload/css/jquery.fileupload.css">
+	<script src="${req.contextPath}/styles/admin/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+	<script src="${req.contextPath}/styles/admin/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+	<script src="${req.contextPath}/styles/admin/jquery-file-upload/js/jquery.fileupload.js"></script>
+    
+		<script>
+		</script>
+		 <style type="text/css">
+#accordion .panel-heading {
+	cursor: pointer;
+}
+#accordion .panel-body {
+	padding:0px;
+}
+    </style>
+    <style type="text/css">
+.navbar-search .search-query {
+  -webkit-border-radius: 15px;
+     -moz-border-radius: 15px;
+          border-radius: 15px;
+}
+
+.navbar .navbar-search .search-query {
+    border-radius: 15px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset, 0 1px 0 rgba(255, 255, 255, 0.15);
+    color: gray;
+    transition: width 0.3s ease 0s;
+    width: 100px;
+}
+
+.navbar .navbar-search .search-query:focus {
+    transition: width 0.3s ease 0s;
+    width: 200px;
+}
+	</style>
+    <style type="text/css">
+#accordion .panel-heading {
+	cursor: pointer;
+}
+#accordion .panel-body {
+	padding:0px;
+}
+    </style>
+    <script type="text/javascript">
+$(function() {
+    $.showMessage($('#m-success-message').html(), {
+        position: 'top',
+        size: '55',
+        fontSize: '20px'
+    });
+
+    $('.datepicker').datepicker({
+		language: 'zh_CN',
+		format: 'yyyy-mm-dd',
+        autoclose: true
+	});
+
+    $('.datetimepicker').datetimepicker({
+		language: 'zh_CN',
+        format: "yyyy-mm-dd hh:ii",
+        autoclose: true,
+        todayBtn: true,
+        pickerPosition: "bottom-left"
+    });
+
+    function widgetToggleContent() {
+        var self = $(this);
+        self.toggleClass('glyphicon-chevron-up');
+        self.toggleClass('glyphicon-chevron-down');
+        var widget = self.parents('.panel');
+        var content = widget.find('.panel-body');
+        content.toggle(200);
+    }
+
+    $(document).delegate('.panel .panel-heading .ctrl .glyphicon-chevron-up', 'click', widgetToggleContent);
+    $(document).delegate('.panel .panel-heading .ctrl .glyphicon-chevron-down', 'click', widgetToggleContent);
+});
+    </script>
+
+	</head>
+
+	<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+   <!-- start of sidebar 头部 -->
+	<#include "/admin/layout/top.html"/>
+  </div>
+</div>
+
+
+    <div class="row-fluid">
+	  
+
+    <!-- start of sidebar 左侧菜单部分 -->
+   	<div class="panel-group col-md-2" id="accordion" role="tablist" aria-multiselectable="true" style="padding-top:65px;">
+		<#include "/admin/layout/left.html"/>
+	</div>	
+	<!-- 个人信息 -->
+	<#include "/admin/user/userInfo.html"/>   
+    <!-- end of sidebar -->
+
+
+
+	<!-- start of main 右侧内容部分-->
+	<section id="m-main" class="col-md-10" style="padding-top:65px;">
+		<#include "/admin/layout/right.html"/>
+    </section>
+	<!-- end of main -->
+	</div>
+	
+	
+	
+</body>
+</html>

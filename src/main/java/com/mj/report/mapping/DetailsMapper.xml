@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mj.report.dao.DetailsDao" >
+  <resultMap id="BaseResultMap" type="com.mj.report.model.Details" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cs_request_date" property="csRequestDate" jdbcType="VARCHAR" />
+    <result column="tranportation_number" property="tranportationNumber" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="customer" property="customer" jdbcType="NVARCHAR" />
+    <result column="ship_to_location" property="shipToLocation" jdbcType="NVARCHAR" />
+    <result column="city_province" property="cityProvince" jdbcType="NVARCHAR" />
+    <result column="request_exw_date" property="requestExwDate" jdbcType="VARCHAR" />
+    <result column="pick_up_location" property="pickUpLocation" jdbcType="NVARCHAR" />
+    <result column="request_arrival_date" property="requestArrivalDate" jdbcType="VARCHAR" />
+    <result column="forwarder_name" property="forwarderName" jdbcType="NVARCHAR" />
+    <result column="trucktype" property="trucktype" jdbcType="VARCHAR" />
+    <result column="transport_order_date" property="transportOrderDate" jdbcType="VARCHAR" />
+    <result column="transport_order_time" property="transportOrderTime" jdbcType="VARCHAR" />
+    <result column="vehicle_planttime" property="vehiclePlanttime" jdbcType="VARCHAR" />
+    <result column="truck_pickup_date" property="truckPickupDate" jdbcType="VARCHAR" />
+    <result column="truck_arrival_time" property="truckArrivalTime" jdbcType="VARCHAR" />
+    <result column="truck_left_time" property="truckLeftTime" jdbcType="VARCHAR" />
+    <result column="loading_duration_time" property="loadingDurationTime" jdbcType="VARCHAR" />
+    <result column="loading_duration_breakdown" property="loadingDurationBreakdown" jdbcType="VARCHAR" />
+    <result column="truck_plate" property="truckPlate" jdbcType="NVARCHAR" />
+    <result column="trucktype1" property="trucktype1" jdbcType="VARCHAR" />
+    <result column="sap_delivery_order" property="sapDeliveryOrder" jdbcType="VARCHAR" />
+    <result column="actual_arrival_customer_date" property="actualArrivalCustomerDate" jdbcType="VARCHAR" />
+    <result column="customer_complain" property="customerComplain" jdbcType="NVARCHAR" />
+    <result column="customer_signed_recipt_request_return_date" property="customerSignedReciptRequestReturnDate" jdbcType="VARCHAR" />
+    <result column="customer_signed_recipt_actual_return_date" property="customerSignedReciptActualReturnDate" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.mj.report.model.Details" extends="BaseResultMap" >
+    <result column="createtime" property="createtime" jdbcType="BINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cs_request_date, tranportation_number, type, customer, ship_to_location, city_province, 
+    request_exw_date, pick_up_location, request_arrival_date, forwarder_name, trucktype, 
+    transport_order_date, transport_order_time, vehicle_planttime, truck_pickup_date, 
+    truck_arrival_time, truck_left_time, loading_duration_time, loading_duration_breakdown, 
+    truck_plate, trucktype1, sap_delivery_order, actual_arrival_customer_date, customer_complain, 
+    customer_signed_recipt_request_return_date, customer_signed_recipt_actual_return_date
+  </sql>
+  <sql id="Blob_Column_List" >
+    createtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from details
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from details
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mj.report.model.Details" >
+    insert into details (id, cs_request_date, tranportation_number, 
+      type, customer, ship_to_location, 
+      city_province, request_exw_date, pick_up_location, 
+      request_arrival_date, forwarder_name, trucktype, 
+      transport_order_date, transport_order_time, 
+      vehicle_planttime, truck_pickup_date, truck_arrival_time, 
+      truck_left_time, loading_duration_time, loading_duration_breakdown, 
+      truck_plate, trucktype1, sap_delivery_order, 
+      actual_arrival_customer_date, customer_complain, 
+      customer_signed_recipt_request_return_date, customer_signed_recipt_actual_return_date, 
+    , createtime)
+    values (#{id,jdbcType=INTEGER}, #{csRequestDate,jdbcType=VARCHAR}, #{tranportationNumber,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{customer,jdbcType=NVARCHAR}, #{shipToLocation,jdbcType=NVARCHAR}, 
+      #{cityProvince,jdbcType=NVARCHAR}, #{requestExwDate,jdbcType=VARCHAR}, #{pickUpLocation,jdbcType=NVARCHAR}, 
+      #{requestArrivalDate,jdbcType=VARCHAR}, #{forwarderName,jdbcType=NVARCHAR}, #{trucktype,jdbcType=VARCHAR}, 
+      #{transportOrderDate,jdbcType=VARCHAR}, #{transportOrderTime,jdbcType=VARCHAR}, 
+      #{vehiclePlanttime,jdbcType=VARCHAR}, #{truckPickupDate,jdbcType=VARCHAR}, #{truckArrivalTime,jdbcType=VARCHAR}, 
+      #{truckLeftTime,jdbcType=VARCHAR}, #{loadingDurationTime,jdbcType=VARCHAR}, #{loadingDurationBreakdown,jdbcType=VARCHAR}, 
+      #{truckPlate,jdbcType=NVARCHAR}, #{trucktype1,jdbcType=VARCHAR}, #{sapDeliveryOrder,jdbcType=VARCHAR}, 
+      #{actualArrivalCustomerDate,jdbcType=VARCHAR}, #{customerComplain,jdbcType=NVARCHAR}, 
+      #{customerSignedReciptRequestReturnDate,jdbcType=VARCHAR}, #{customerSignedReciptActualReturnDate,jdbcType=VARCHAR}, 
+       #{createtime,jdbcType=BINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mj.report.model.Details" >
+    insert into details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+    
+      <if test="csRequestDate != null" >
+        cs_request_date,
+      </if>
+      <if test="tranportationNumber != null" >
+        tranportation_number,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="customer != null" >
+        customer,
+      </if>
+      <if test="shipToLocation != null" >
+        ship_to_location,
+      </if>
+      <if test="cityProvince != null" >
+        city_province,
+      </if>
+      <if test="requestExwDate != null" >
+        request_exw_date,
+      </if>
+      <if test="pickUpLocation != null" >
+        pick_up_location,
+      </if>
+      <if test="requestArrivalDate != null" >
+        request_arrival_date,
+      </if>
+      <if test="forwarderName != null" >
+        forwarder_name,
+      </if>
+      <if test="trucktype != null" >
+        trucktype,
+      </if>
+      <if test="transportOrderDate != null" >
+        transport_order_date,
+      </if>
+      <if test="transportOrderTime != null" >
+        transport_order_time,
+      </if>
+      <if test="vehiclePlanttime != null" >
+        vehicle_planttime,
+      </if>
+      <if test="truckPickupDate != null" >
+        truck_pickup_date,
+      </if>
+      <if test="truckArrivalTime != null" >
+        truck_arrival_time,
+      </if>
+      <if test="truckLeftTime != null" >
+        truck_left_time,
+      </if>
+      <if test="loadingDurationTime != null" >
+        loading_duration_time,
+      </if>
+      <if test="loadingDurationBreakdown != null" >
+        loading_duration_breakdown,
+      </if>
+      <if test="truckPlate != null" >
+        truck_plate,
+      </if>
+      <if test="trucktype1 != null" >
+        trucktype1,
+      </if>
+      <if test="sapDeliveryOrder != null" >
+        sap_delivery_order,
+      </if>
+      <if test="actualArrivalCustomerDate != null" >
+        actual_arrival_customer_date,
+      </if>
+      <if test="customerComplain != null" >
+        customer_complain,
+      </if>
+      <if test="customerSignedReciptRequestReturnDate != null" >
+        customer_signed_recipt_request_return_date,
+      </if>
+      <if test="customerSignedReciptActualReturnDate != null" >
+        customer_signed_recipt_actual_return_date,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+  
+      <if test="csRequestDate != null" >
+        #{csRequestDate,jdbcType=VARCHAR},
+      </if>
+      <if test="tranportationNumber != null" >
+        #{tranportationNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="customer != null" >
+        #{customer,jdbcType=NVARCHAR},
+      </if>
+      <if test="shipToLocation != null" >
+        #{shipToLocation,jdbcType=NVARCHAR},
+      </if>
+      <if test="cityProvince != null" >
+        #{cityProvince,jdbcType=NVARCHAR},
+      </if>
+      <if test="requestExwDate != null" >
+        #{requestExwDate,jdbcType=VARCHAR},
+      </if>
+      <if test="pickUpLocation != null" >
+        #{pickUpLocation,jdbcType=NVARCHAR},
+      </if>
+      <if test="requestArrivalDate != null" >
+        #{requestArrivalDate,jdbcType=VARCHAR},
+      </if>
+      <if test="forwarderName != null" >
+        #{forwarderName,jdbcType=NVARCHAR},
+      </if>
+      <if test="trucktype != null" >
+        #{trucktype,jdbcType=VARCHAR},
+      </if>
+      <if test="transportOrderDate != null" >
+        #{transportOrderDate,jdbcType=VARCHAR},
+      </if>
+      <if test="transportOrderTime != null" >
+        #{transportOrderTime,jdbcType=VARCHAR},
+      </if>
+      <if test="vehiclePlanttime != null" >
+        #{vehiclePlanttime,jdbcType=VARCHAR},
+      </if>
+      <if test="truckPickupDate != null" >
+        #{truckPickupDate,jdbcType=VARCHAR},
+      </if>
+      <if test="truckArrivalTime != null" >
+        #{truckArrivalTime,jdbcType=VARCHAR},
+      </if>
+      <if test="truckLeftTime != null" >
+        #{truckLeftTime,jdbcType=VARCHAR},
+      </if>
+      <if test="loadingDurationTime != null" >
+        #{loadingDurationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="loadingDurationBreakdown != null" >
+        #{loadingDurationBreakdown,jdbcType=VARCHAR},
+      </if>
+      <if test="truckPlate != null" >
+        #{truckPlate,jdbcType=NVARCHAR},
+      </if>
+      <if test="trucktype1 != null" >
+        #{trucktype1,jdbcType=VARCHAR},
+      </if>
+      <if test="sapDeliveryOrder != null" >
+        #{sapDeliveryOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="actualArrivalCustomerDate != null" >
+        #{actualArrivalCustomerDate,jdbcType=VARCHAR},
+      </if>
+      <if test="customerComplain != null" >
+        #{customerComplain,jdbcType=NVARCHAR},
+      </if>
+      <if test="customerSignedReciptRequestReturnDate != null" >
+        #{customerSignedReciptRequestReturnDate,jdbcType=VARCHAR},
+      </if>
+      <if test="customerSignedReciptActualReturnDate != null" >
+        #{customerSignedReciptActualReturnDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mj.report.model.Details" >
+    update details
+    <set >
+      <if test="csRequestDate != null" >
+        cs_request_date = #{csRequestDate,jdbcType=VARCHAR},
+      </if>
+      <if test="tranportationNumber != null" >
+        tranportation_number = #{tranportationNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="customer != null" >
+        customer = #{customer,jdbcType=NVARCHAR},
+      </if>
+      <if test="shipToLocation != null" >
+        ship_to_location = #{shipToLocation,jdbcType=NVARCHAR},
+      </if>
+      <if test="cityProvince != null" >
+        city_province = #{cityProvince,jdbcType=NVARCHAR},
+      </if>
+      <if test="requestExwDate != null" >
+        request_exw_date = #{requestExwDate,jdbcType=VARCHAR},
+      </if>
+      <if test="pickUpLocation != null" >
+        pick_up_location = #{pickUpLocation,jdbcType=NVARCHAR},
+      </if>
+      <if test="requestArrivalDate != null" >
+        request_arrival_date = #{requestArrivalDate,jdbcType=VARCHAR},
+      </if>
+      <if test="forwarderName != null" >
+        forwarder_name = #{forwarderName,jdbcType=NVARCHAR},
+      </if>
+      <if test="trucktype != null" >
+        trucktype = #{trucktype,jdbcType=VARCHAR},
+      </if>
+      <if test="transportOrderDate != null" >
+        transport_order_date = #{transportOrderDate,jdbcType=VARCHAR},
+      </if>
+      <if test="transportOrderTime != null" >
+        transport_order_time = #{transportOrderTime,jdbcType=VARCHAR},
+      </if>
+      <if test="vehiclePlanttime != null" >
+        vehicle_planttime = #{vehiclePlanttime,jdbcType=VARCHAR},
+      </if>
+      <if test="truckPickupDate != null" >
+        truck_pickup_date = #{truckPickupDate,jdbcType=VARCHAR},
+      </if>
+      <if test="truckArrivalTime != null" >
+        truck_arrival_time = #{truckArrivalTime,jdbcType=VARCHAR},
+      </if>
+      <if test="truckLeftTime != null" >
+        truck_left_time = #{truckLeftTime,jdbcType=VARCHAR},
+      </if>
+      <if test="loadingDurationTime != null" >
+        loading_duration_time = #{loadingDurationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="loadingDurationBreakdown != null" >
+        loading_duration_breakdown = #{loadingDurationBreakdown,jdbcType=VARCHAR},
+      </if>
+      <if test="truckPlate != null" >
+        truck_plate = #{truckPlate,jdbcType=NVARCHAR},
+      </if>
+      <if test="trucktype1 != null" >
+        trucktype1 = #{trucktype1,jdbcType=VARCHAR},
+      </if>
+      <if test="sapDeliveryOrder != null" >
+        sap_delivery_order = #{sapDeliveryOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="actualArrivalCustomerDate != null" >
+        actual_arrival_customer_date = #{actualArrivalCustomerDate,jdbcType=VARCHAR},
+      </if>
+      <if test="customerComplain != null" >
+        customer_complain = #{customerComplain,jdbcType=NVARCHAR},
+      </if>
+      <if test="customerSignedReciptRequestReturnDate != null" >
+        customer_signed_recipt_request_return_date = #{customerSignedReciptRequestReturnDate,jdbcType=VARCHAR},
+      </if>
+      <if test="customerSignedReciptActualReturnDate != null" >
+        customer_signed_recipt_actual_return_date = #{customerSignedReciptActualReturnDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=BINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mj.report.model.Details" >
+    update details
+    set cs_request_date = #{csRequestDate,jdbcType=VARCHAR},
+      tranportation_number = #{tranportationNumber,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      customer = #{customer,jdbcType=NVARCHAR},
+      ship_to_location = #{shipToLocation,jdbcType=NVARCHAR},
+      city_province = #{cityProvince,jdbcType=NVARCHAR},
+      request_exw_date = #{requestExwDate,jdbcType=VARCHAR},
+      pick_up_location = #{pickUpLocation,jdbcType=NVARCHAR},
+      request_arrival_date = #{requestArrivalDate,jdbcType=VARCHAR},
+      forwarder_name = #{forwarderName,jdbcType=NVARCHAR},
+      trucktype = #{trucktype,jdbcType=VARCHAR},
+      transport_order_date = #{transportOrderDate,jdbcType=VARCHAR},
+      transport_order_time = #{transportOrderTime,jdbcType=VARCHAR},
+      vehicle_planttime = #{vehiclePlanttime,jdbcType=VARCHAR},
+      truck_pickup_date = #{truckPickupDate,jdbcType=VARCHAR},
+      truck_arrival_time = #{truckArrivalTime,jdbcType=VARCHAR},
+      truck_left_time = #{truckLeftTime,jdbcType=VARCHAR},
+      loading_duration_time = #{loadingDurationTime,jdbcType=VARCHAR},
+      loading_duration_breakdown = #{loadingDurationBreakdown,jdbcType=VARCHAR},
+      truck_plate = #{truckPlate,jdbcType=NVARCHAR},
+      trucktype1 = #{trucktype1,jdbcType=VARCHAR},
+      sap_delivery_order = #{sapDeliveryOrder,jdbcType=VARCHAR},
+      actual_arrival_customer_date = #{actualArrivalCustomerDate,jdbcType=VARCHAR},
+      customer_complain = #{customerComplain,jdbcType=NVARCHAR},
+      customer_signed_recipt_request_return_date = #{customerSignedReciptRequestReturnDate,jdbcType=VARCHAR},
+      customer_signed_recipt_actual_return_date = #{customerSignedReciptActualReturnDate,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=BINARY}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mj.report.model.Details" >
+    update details
+    set cs_request_date = #{csRequestDate,jdbcType=VARCHAR},
+      tranportation_number = #{tranportationNumber,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      customer = #{customer,jdbcType=NVARCHAR},
+      ship_to_location = #{shipToLocation,jdbcType=NVARCHAR},
+      city_province = #{cityProvince,jdbcType=NVARCHAR},
+      request_exw_date = #{requestExwDate,jdbcType=VARCHAR},
+      pick_up_location = #{pickUpLocation,jdbcType=NVARCHAR},
+      request_arrival_date = #{requestArrivalDate,jdbcType=VARCHAR},
+      forwarder_name = #{forwarderName,jdbcType=NVARCHAR},
+      trucktype = #{trucktype,jdbcType=VARCHAR},
+      transport_order_date = #{transportOrderDate,jdbcType=VARCHAR},
+      transport_order_time = #{transportOrderTime,jdbcType=VARCHAR},
+      vehicle_planttime = #{vehiclePlanttime,jdbcType=VARCHAR},
+      truck_pickup_date = #{truckPickupDate,jdbcType=VARCHAR},
+      truck_arrival_time = #{truckArrivalTime,jdbcType=VARCHAR},
+      truck_left_time = #{truckLeftTime,jdbcType=VARCHAR},
+      loading_duration_time = #{loadingDurationTime,jdbcType=VARCHAR},
+      loading_duration_breakdown = #{loadingDurationBreakdown,jdbcType=VARCHAR},
+      truck_plate = #{truckPlate,jdbcType=NVARCHAR},
+      trucktype1 = #{trucktype1,jdbcType=VARCHAR},
+      sap_delivery_order = #{sapDeliveryOrder,jdbcType=VARCHAR},
+      actual_arrival_customer_date = #{actualArrivalCustomerDate,jdbcType=VARCHAR},
+      customer_complain = #{customerComplain,jdbcType=NVARCHAR},
+      customer_signed_recipt_request_return_date = #{customerSignedReciptRequestReturnDate,jdbcType=VARCHAR},
+      customer_signed_recipt_actual_return_date = #{customerSignedReciptActualReturnDate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="getFirstList" resultType="java.util.HashMap" parameterType="java.util.Map">
+  		select id, cs_request_date,tranportation_number,type,customer,ship_to_location,city_province,request_exw_date,pick_up_location,request_arrival_date,forwarder_name,trucktype,transport_order_date,transport_order_time,vehicle_planttime,truck_pickup_date,truck_arrival_time,truck_left_time,loading_duration_time,loading_duration_breakdown,truck_plate,trucktype1,sap_delivery_order,actual_arrival_customer_date,customer_complain,customer_signed_recipt_request_return_date,customer_signed_recipt_actual_return_date from details
+  		where   1=1
+  		  <if test="cs_request_date_search != ''" >
+        	and	cs_request_date = #{cs_request_date_search,jdbcType=VARCHAR}
+    	  </if>
+    	  <if test="tranportation_number_search != ''" >
+        	and	tranportation_number = #{tranportation_number_search,jdbcType=VARCHAR}
+    	  </if>
+    	   <if test="type_search != ''" >
+        	and	type = #{type_search,jdbcType=VARCHAR}
+    	  </if>
+    	   <if test="sap_delivery_order_search != ''" >
+        	and	sap_delivery_order = #{sap_delivery_order_search,jdbcType=VARCHAR}
+    	  </if>
+  		order by createtime desc
+  </select>
+  
+  
+  <select id="getFirstList1" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"></include>
+  	from details
+  </select>
+</mapper>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>登录 - 报表系统</title> 
+<meta name="keywords"
+	content="Bootstrap模版,Bootstrap模版下载,Bootstrap教程,Bootstrap中文" />
+<meta name="description"
+	content="站长素材提供Bootstrap模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="${req.contextPath}/styles/favicon.ico" mce_href="${req.contextPath}/styles/favicon.ico" type="image/x-icon" />
+<!-- basic styles -->
+
+<link rel="stylesheet" href="${req.contextPath}/styles/web/css/loginbg.css" />
+</head>
+<body class="loginbg">
+
+<div class="loginzg">
+	<!-- background switcher -->
+
+
+
+	<div class="login-wrapper" >
+
+		<div class="box">
+			<div class="content-wrap">
+				<h6>
+					<img src="${req.contextPath}/styles/web/images/logoy.png" width="319"
+						height="174" class="logo" />
+				</h6>
+				<#if error?exists && error != ""> <p style="border-bottom:1px solid #CCC;font-size:16px;color:#478fca!important"> <i class="icon-coffee green"></i> ${error?default('')} </p></#if>
+				<form action="" method="post">
+					<fieldset>
+						<input class="form-control" name="username" type="text"
+							placeholder="用户名"> <input class="form-control"
+							name="password" type="password" placeholder="密码"> 
+<!-- 							<a -->
+<!-- 							href="${req.contextPath}/web/password" class="forgot">忘记密码?</a> -->
+						<div class="remember">
+							<input id="remember-me" name="rememberMe" value="true"
+								type="checkbox"> <label for="remember-me">记住密码</label>
+						</div>
+						<input type="submit" class="btn-glow primary login" value="登录" />
+					</fieldset>
+				</form>
+			</div>
+		</div>
+
+		<div class="no-account">
+<!-- 			<p>还没账号?</p> -->
+<!-- 			<a href="${req.contextPath}/web/register">注册</a> -->
+		</div>
+	</div>
+</div>
+</body>
+
+
+
+</html>

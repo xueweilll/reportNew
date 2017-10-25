@@ -1,0 +1,27 @@
+ <#list mlist as m>
+   <div class="panel panel-default">
+    <div class="panel-heading"   data-toggle="collapse" data-parent="#accordion" href="#collapse-body-${m.menuId}" aria-expanded="true" aria-controls="collapse-body-delegate">
+      <h4 class="panel-title">
+	    <i class="glyphicon glyphicon-list"></i>
+        ${m.menuName}
+      </h4>
+    </div>
+    <div id="collapse-body-${m.menuId}" class="panel-collapse collapse" >
+      <div class="panel-body">
+        <ul class="nav nav-list">
+        <#list m.children as mc>
+		  <li><a href="javascript:dataList('${req.contextPath}${mc.menuUrl}?mid=${mc.menuId}')" ><i class="glyphicon glyphicon-list"></i> ${mc.menuName }</a></li>
+		</#list> 
+        </ul>
+      </div>
+    </div>
+  </div>
+</#list>
+
+  
+
+		<footer id="m-footer" class="text-center">
+		  <hr>
+		  &copy;Mossle
+		</footer>
+
